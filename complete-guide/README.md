@@ -66,6 +66,21 @@ To get emmet (code completion) working in VSCode, simply add this to your user s
     "emmet.triggerExpansionOnTab": true
 ```
 
+## JSX Basic Example
+```jsx
+return (
+      <div className="App">
+        <h1>This is my first React App!</h1>
+        <p>This is really working!</p>
+      </div>
+    );
+```
+***Note:** JSX looks a lot like HTML, but did you notice that _"className"_ is used instead of _"class"_. There are many subtle differences like this in JSX and that is because it is actually just javascript, NOT HTML. In Javascript, _class_ is a reserved word, which is why we have to use _className_. It's also a best practice to wrap all your jsx in a single div, like we did in the example above. If we wanted to, we can instead write our code like shown below. In fact, our code will be compiled by one of the many build tools to be like the code below, but it is cumbersome to write our code like that, so we use JSX as shown above instead.
+```jsx
+return React.createElement('div', null, React.createElement('h1', {className: 'App'}, 'This is my first React App!'));
+```
+> This is the exact same thing as the JSX example. In fact, the JSX will eventually be compiled by one of the many build tools to look just like this example here.
+
 ## Components
 Components are the core building blocks of React apps. Actually, React
 really is just a library for creating components at its core.
@@ -100,8 +115,8 @@ class Cmp extends Component {
 ```
 
 We'll of course dive into the difference throughout this course, you can
-already note that you should use 1) as often as possible though. It's the
-best-practice.
+already note that you should **_use functional components as often as possible_** though. It's the
+best-practice and it's better because they do NOT handle state management, making it easier to debug your app.
 
 ## Props
 
