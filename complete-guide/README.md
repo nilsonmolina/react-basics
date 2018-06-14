@@ -40,11 +40,37 @@ npx create-react-app <project>
 <img src='readme_assets/create-react-app.svg' width='600' alt='npm start'>
 </p>
 
+## React Folder Structure
+```
+|-> my-app
+    |-> node modules
+    |-> public
+    |-> src
+    > .gitignore
+    > package-lock.json
+    > package.json
+    > README.md
+```
+- The lock files `package-lock.json` and yarn.lock are basically locking in the versions of the dependencies we are using.
+- The general depencies our projects has is defined in the `package.json` file. There are also a few scripts defined in here that we can run by using _npm run [script name]_. The _"start"_ command can be used to run the development server, compile our code, watch our code, etc... When we are ready to deploy our app we can use the _"build"_ command which will prepare the app for deployment, but not run the development server.
+- The `node-modules` holds all the dependencies, sub-dependencies, and build tools of our project. We should not touch anything in here as it is created and maintained automatically. Also, it is ignored by git to save space as this folder gets very large, very quickly.
+- The `public` folder is basically the root folder that gets served by the webserver. For many SPA's, and in this project, we will never add more html files to this folder. The manifest.json file is there, is used for progressive web apps where we define metadata for our app.
+- The `src` folder is where we will actually be working in, it is our react application.  The index.js file gets access to the root element in our index.html file in the public folder.
+
+## VSCode (Emmet)
+To get emmet (code completion) working in VSCode, simply add this to your user settings:
+```
+"emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "emmet.triggerExpansionOnTab": true
+```
+
 ## Components
 Components are the core building blocks of React apps. Actually, React
 really is just a library for creating components at its core.
 A typical React app therefore could be depicted as a component tree -
-having one root component ("App") and then an potentially infinite amount
+having one root component ("App") and then a potentially infinite amount
 of nested child components. Each component needs to return/render some JSX code - it defines
 which HTML code React should render to the real DOM in the end.
 
