@@ -196,4 +196,166 @@ The difference to props is, that this happens within one and the same component 
 We saw that you can react to the onClick event - but to which other events can you listen? You can find a list of 
 supported events here: https://reactjs.org/docs/events.html#supported-events
 
-## Rendering Lists & Conditional Content
+## Conditional Content
+Since JSX is really javascript and NOT HTML, we can use ternary to conditionally output things as shown below.  Only simple javascript statements can be used, so if/else blocks are not allowed, which is why we used ternary here. 
+```javascript
+return (
+      <div className="App">
+        <h1>This is my first React App!</h1>
+        <p>This is really working!</p>
+        <button
+          style={style} 
+          onClick={this.togglePersonsHandler} >Switch Name</button>
+        { 
+          this.state.showPersons ? 
+          <div>
+            <Person 
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+              />
+            <Person 
+              name={this.state.persons[1].name} 
+              age={this.state.persons[1].age} />
+          </div> : null
+        }
+      </div>
+    );
+```
+However, if we pull out the content from the return statement, we have more control.  This is the preferred way of handling conditional content.
+```javascript
+let persons = null;
+if (this.state.showPersons) {
+    persons = (
+    <div>
+        <Person 
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+            />
+        <Person 
+            name={this.state.persons[1].name} 
+            age={this.state.persons[1].age} />
+    </div>
+    );
+}
+
+return (
+    <div className="App">
+    <h1>This is my first React App!</h1>
+    <p>This is really working!</p>
+    <button
+        style={style} 
+        onClick={this.togglePersonsHandler} >Switch Name</button>
+    {persons}
+    </div>
+);
+```
+
+## Outputting Lists
+Our previous way of presenting a list was very inefficient:
+```javascript
+persons = (
+    <div>
+        <Person 
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age} />
+        <Person 
+            name={this.state.persons[1].name} 
+            age={this.state.persons[1].age} />
+        <Person 
+            name={this.state.persons[2].name} 
+            age={this.state.persons[2].age} />
+        <Person 
+            name={this.state.persons[3].name} 
+            age={this.state.persons[3].age} />
+        <Person 
+            name={this.state.persons[4].name} 
+            age={this.state.persons[4].age} />
+    </div>
+);
+```
+This is a better way:
+```javascript
+persons = (
+    <div>
+        {this.state.persons.map(person => {
+            return <Person name={person.name} age={person.age} />
+        })}
+    </div>
+```
+
+## Update State Immutably
+```javascript
+deletePersonHandler = (personIndex) => {
+    const persons = this.state.persons;
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons})
+  }
+```
+The flaw of this approach is that in javascript, objects and arrays are reference types. So when we get persons from the state, we are actually getting a pointer to the original state. By splicing the pointer, you are affecting the actual data, which is NOT a good practice. No errors will be thrown, but it can result in wonky, unexpected behaviors.
+```javascript
+deletePersonHandler = (personIndex) => {
+    const persons = this.state.persons.slice();
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons})
+  }
+```
+One alternative is to call splice() to make a copy of the state and then splice that copy. In this way, we are making immutable changes to the persons array.
+```javascript
+deletePersonHandler = (personIndex) => {
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons})
+  }
+```
+We can also use the spread operator to achieve the same.
+> Always make changes to state immutably
+
+## Key prop
+The key property, is an important property in we should add when rendering a list of data.  It is a default property react expects to find on an element that you render through a list and it helps react update the list efficiently. The key is used by react to keep track of the individual elements so that it has a clear property it can compare to find out which elements changed, so that it only re-renders those elements, and not the ones that did not change.
+
+**Before:**
+```javascript
+state = {
+    persons: [
+        {name: 'Linh', age: 25},
+        {name: 'Mark', age: 22},
+        {name: 'Edouard', age: 19}
+    ],
+    showPersons: false
+}
+
+persons = (
+    <div>
+        {this.state.persons.map((person, index) => {
+        return <Person 
+            click={this.deletePersonHandler.bind(this, index)}
+            name={person.name}
+            age={person.age} />
+        })}
+    </div>
+);
+```
+**After:**
+```javascript
+state = {
+    persons: [
+        { id: 1, name: 'Linh', age: 25},
+        { id: 2, name: 'Mark', age: 22},
+        { id: 3, name: 'Edouard', age: 19}
+    ],
+    showPersons: false
+}
+
+persons = (
+    <div>
+        {this.state.persons.map((person, index) => {
+        return <Person 
+            click={this.deletePersonHandler.bind(this, index)}
+            name={person.name}
+            age={person.age}
+            key={person.id} />
+        })}
+    </div>
+);
+```
+*We do NOT use the map index because if that gets reset on every map call.  For example, if we delete index 3, then the indexes over three will cascade down.
