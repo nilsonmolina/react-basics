@@ -413,3 +413,7 @@ There are also packages for improving how styling works in React.  Below are lin
 - More information about CSS Modules: https://github.com/css-modules/css-modules
 
 ## Debugging
+Debugging react is pretty similar to debugging any web app.  First and most importantly, learn to enjoy error messages, do NOT fear them.  Check the Chrome Developer Tools and read any error messages you may encounter.  Secondly, install the 'React Developer Tools' chrome extension to get additional information when debugging your react apps.  Last but not least, you can create a ErrorBoundary HOC (Higher Order Component), that you wrap your components with.  Any time an error is thrown, your HOC will redirect to a custom error message.  Do NOT overly rely on this, as it is better to actually fix your code, rather than simply catch any errors.  Below are some resource links for more information:
+
+- Error Boundaries: https://reactjs.org/docs/error-boundaries.html
+- Chrome Devtool Debugging: https://developers.google.com/web/tools/chrome-devtools/javascript/
