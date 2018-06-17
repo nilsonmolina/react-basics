@@ -359,3 +359,57 @@ persons = (
 );
 ```
 *We do NOT use the map index because if that gets reset on every map call.  For example, if we delete index 3, then the indexes over three will cascade down.
+
+## Styles (Inline Styles vs Separate CSS file)
+You can set your styles using css files or defining them in the javascript code.  When using them as separate files, know that they will be globally scoped, but if put in the javascript, they are scoped only at the component level.  Below are some examples of styles written in the javascript code:
+```javascript
+ render() {
+    const style = {
+      backgroundColor: 'green',
+      color: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
+    return (
+      <div>
+        <h1>This is my first React App!</h1>
+        <button
+          style={style} 
+          onClick={this.togglePersonsHandler} >Toggle Persons</button>
+        {persons}
+      </div>
+    );
+ }
+```
+When defining the styles, notice that they are not exact css syntax. For example, 'background-color' is written as 'backgroundColor'. This is because the naming convention still has to be proper javascript. If you wanted to use the proper css syntax, you can simply use quotes and it will still work.
+
+```javascript
+ render() {
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold');
+    }
+
+    return (
+      <div className='App'>
+        <h1>This is my first React App!</h1>
+        <p className={classes.join(' ')}>This is really working!</p>
+        {persons}
+      </div>
+    );
+ }
+```
+We can still have dynamic styles when using separate CSS files as shown above. The course goes into a lot of details on using packages like Radium to use inline styles, but I prefer this method, and it is the one I will be sticking with.
+
+There are also packages for improving how styling works in React.  Below are links to some resources
+- Using CSS Modules in create-react-app Projects: https://medium.com/nulogy/how-to-use-css-modules-with-create-react-app-9e44bec2b5c2
+
+- More information about CSS Modules: https://github.com/css-modules/css-modules
+
+## Debugging
