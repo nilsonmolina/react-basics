@@ -417,3 +417,13 @@ Debugging react is pretty similar to debugging any web app.  First and most impo
 
 - Error Boundaries: https://reactjs.org/docs/error-boundaries.html
 - Chrome Devtool Debugging: https://developers.google.com/web/tools/chrome-devtools/javascript/
+
+## Folder Structure
+In the training, Max had us restructure the src folder to follow a cleaner setup, that I like as well:
+```
+|-> src
+    |-> assets
+    |-> components
+    |-> containers
+```
+In the `assets` folder we can place any images or media files, the `components` folder will contain our 'stateless', 'presentational', functional, components that format the view (like the Person component) and lastly the `containers` folder will hold the 'stateful', 'container', class components that store and manipulate state (like the App component).
