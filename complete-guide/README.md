@@ -427,3 +427,69 @@ In the training, Max had us restructure the src folder to follow a cleaner setup
     |-> containers
 ```
 In the `assets` folder we can place any images or media files, the `components` folder will contain our 'stateless', 'presentational', functional, components that format the view (like the Person component) and lastly the `containers` folder will hold the 'stateful', 'container', class components that store and manipulate state (like the App component).
+
+## Aux and Fragment
+A common pattern in React is for a component to return a lsit of children. Take this example:
+```javascript
+class Table extends React.Component {
+  render() {
+    return (
+      <table>
+        <tr>
+          <Columns />
+        </tr>
+      </table>
+    );
+  }
+}
+```
+`<Columns />` would need to return multiple `<td>` elements in order for the rendered HTML to be valid. However, React requires a single element at a time, so you would need to wrap all the elements with a div for example. But, if a parent div was used inside the `render()` of `<Columns />`, then the resulting HTML will be invalid.
+
+```javascript
+class Columns extends React.Component {
+  render() {
+    return (
+      <div>
+        <td>Hello</td>
+        <td>World</td>
+      </div>
+    );
+  }
+}
+```
+The above will result in the following invalid HTML:
+```html
+<table>
+  <tr>
+    <div>
+      <td>Hello</td>
+      <td>World</td>
+    </div>
+  </tr>
+</table>
+```
+So to fix that, we can use `fragments`:
+```javascript
+class Columns extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <td>Hello</td>
+        <td>World</td>
+      </React.Fragment>
+    );
+  }
+}
+```
+Which results in the following HTML:
+```html
+<table>
+  <tr>
+    <td>Hello</td>
+    <td>World</td>
+  </tr>
+</table>
+```
+
+Reference:  
+https://reactjs.org/docs/fragments.html
