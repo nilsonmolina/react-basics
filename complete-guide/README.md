@@ -493,3 +493,9 @@ Which results in the following HTML:
 
 Reference:  
 https://reactjs.org/docs/fragments.html
+
+## Ajax / Axios
+In order to get data from a server to use in our frontend application, we can use AJAX.  AJAX allows us to make http requests in the backend, almost invisible to the user, which allows a faster and more fluid user experience.  In this course, we are using `axios`, which is a Promise based HTTP client written in javascript. Below is the documentation for axios, which is pretty much what we went over in this section.
+
+Reference:  
+https://github.com/axios/axios
