@@ -4,10 +4,6 @@ import Button from '../../UI/Button/Button';
 // THIS COULD BE A FUNCTIONAL COMPONENT, BUT FOR DEBUGGING 
 class OrderSummary extends Component 
 {
-    componentWillUpdate() {
-        console.log('[OrderSummary] WillUpdate');
-    }
-
     render () {
         const ingredientSummary = Object.keys(this.props.ingredients)
         .map(ingrKey => {
