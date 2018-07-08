@@ -1,5 +1,10 @@
 {
     "compilerOptions": {
       "allowSyntheticDefaultImports": true,
+    },
+    "typeAcquisition": {
+      "include": [
+        "jest"
+      ]
     }
 }
