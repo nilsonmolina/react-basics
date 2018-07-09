@@ -1,3 +1,11 @@
+
+---
+**Udemy Course:** *React 16 - The Complete Guide (incl. React Router 4 & Redux)*
+
+**Course Author:** *Maximilian Schwarzmüller*  
+
+**Burger Builder Site:** _https://burger-builder-n13.firebaseapp.com/_
+
 # My First React App
 ## Introduction
 In this section, we worked on our first React app. Below I have included some useful links to the 
