@@ -4,12 +4,12 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 20vmin;
+  height: 10vmin;
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 20vh;
+  min-height: 25vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,4 +54,8 @@
 .App > .myForm .error {
   color: red;
   font-size: 10px;
+}
+
+.App > .TodoList .completed {
+  text-decoration: line-through;
 }

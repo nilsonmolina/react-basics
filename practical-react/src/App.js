@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import logo from './logo.svg';
+import Header from './components/Header';
 import Basics from './components/Basics';
 import Counter from './components/Counter';
 import ImageSlider from './components/ImageSlider';
@@ -9,6 +9,7 @@ import OptimizedForm from './components/OptimizedForm';
 import ValidationForm from './components/ValidationForm';
 import FetchRandomPerson from './components/FetchRandomPerson';
 import FetchRandomPeople from './components/FetchRandomPeople';
+import TodoList from './components/TodoList';
 
 class App extends Component {
   state = {
@@ -26,11 +27,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
+        <Header />
 
-        <Basics 
+        <Basics
           greeting="Hello" num={13} myObj={{ name: 'Nilson', age: 27 }} myArr={[1,2,3]} constFunc={add} inlineFunc={(a, b) => a + b} classFunc={this.outerAdd} btn={toggleButton}
         />
 
@@ -43,6 +42,9 @@ class App extends Component {
         <ValidationForm />
         <FetchRandomPerson />
         <FetchRandomPeople />
+        <TodoList />
+
+        <Header />
       </div>
     );
   };
