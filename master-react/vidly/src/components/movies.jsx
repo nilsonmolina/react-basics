@@ -18,7 +18,7 @@ export default class Movies extends React.Component {
         {count < 1
           ? <p>There are no movies in the database</p>
           : (
-            <React.Fragment> 
+            <React.Fragment>
               <p>Showing {count} movies in the database.</p>
               <table className="table">
                 <thead>

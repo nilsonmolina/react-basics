@@ -2,46 +2,33 @@ import React from 'react';
 
 export default class Counter extends React.Component {
   state = {
-    count: 0,
-    tags: ['tag1', 'tag2', 'tag3'],
-    // tags: [],
+    value: this.props.value,
   };
 
-  handleIncrement = () => this.setState((state) => ({ count: state.count + 1 }));
+  handleIncrement = () => this.setState((state) => ({ value: state.value + 1 }));
   handleDecrement = () => {
-    if (this.state.count < 1) return;
-    this.setState((state) => ({ count: state.count - 1 }));
+    if (this.state.value < 1) return;
+    this.setState((state) => ({ value: state.value - 1 }));
   };
-
-  renderTags() {
-    if (this.state.tags.length < 1) return <p>There are no tags</p>;
-
-    return <ul>{this.state.tags.map((tag, index) => <li key={index}>{tag}</li>)}</ul>
-  }
 
   render() {
     return (
-      <React.Fragment>
+      <div className="Counter">
         <span className={this.getCountClasses()}>{this.formatCount()}</span>
         <button className="btn btn-increment" onClick={this.handleIncrement}>increment</button>
         <button className="btn btn-decrement" onClick={this.handleDecrement}>decrement</button>
-        {this.state.tags.length < 1 && <p>Please create a tag</p>}
-        {this.renderTags()}
-        {/* <ul>
-          { this.state.tags.map((tag, index) => <li key={ index }>{ tag }</li>) }
-        </ul> */}
-      </React.Fragment>
+      </div>
     );
   };
 
   formatCount() {
-    const { count } = this.state;
-    return count === 0 ? "Zero" : count;
+    const { value } = this.state;
+    return value === 0 ? "Zero" : value;
   };
 
   getCountClasses() {
     let classes = 'count ';
-    this.state.count === 0 ? classes += 'warning ' : classes += 'info '
+    this.state.value === 0 ? classes += 'warning ' : classes += 'info '
     return classes;
   };
 }

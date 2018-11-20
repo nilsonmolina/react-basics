@@ -2,7 +2,7 @@
 
 This repo holds projects I worked on while learning the basics of react.
 
-
+**Practical React Training:** _https://nilsonmolina.github.io/react-basics/practical-react/build/index.html_
 **Burger Builder Site:** _https://burger-builder-n13.firebaseapp.com/_
 
 
