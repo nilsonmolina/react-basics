@@ -27,7 +27,7 @@ export default class TodoList extends React.Component {
   };
 
   handleDeleteTodo = (id) => {
-    this.setState( (state) => ({ 
+    this.setState((state) => ({ 
       todos: state.todos.filter(t => t.id !== id) 
     }));
   };

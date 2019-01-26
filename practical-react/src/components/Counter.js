@@ -6,8 +6,8 @@ export default class Counter extends React.Component {
   componentDidMount() { console.log('mounting counter', this.props.name) };
   componentWillUnmount() { console.log('unmounting counter', this.props.name) };
 
-  handleIncrement = () => this.setState({ count: this.state.count + 1 })
-  handleDecrement = () => this.setState({ count: this.state.count - 1 })
+  handleIncrement = () => this.setState((state) => ({ count: state.count + 1 }));
+  handleDecrement = () => this.setState((state) => ({ count: state.count - 1 }));
 
   render() {
     return (

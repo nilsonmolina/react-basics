@@ -2,8 +2,8 @@
 
 This repo holds projects I worked on while learning the basics of react.
 
-**Practical React Training:** _https://nilsonmolina.github.io/react-basics/practical-react/build/index.html_
-**Burger Builder Site:** _https://burger-builder-n13.firebaseapp.com/_
+**Practical React Training:** _https://nilsonmolina.github.io/react-basics/practical-react/build/index.html_  
+**Burger Builder Site:** _https://burger-builder-n13.firebaseapp.com/_  
 
 
 # React Components
@@ -230,11 +230,11 @@ Below is the proper way to setup and modify state.
 ```javascript
 export default class Counter extends React.Component {
   state = { 
-    count: 0
+    count: 0,
   };
 
   handleIncrement = () => {
-    this.setState({ count: this.state.count + 1 })
+    this.setState((state) => ({ count: state.count + 1 }));
   };
 
   render() {
@@ -246,4 +246,45 @@ export default class Counter extends React.Component {
     );
   };
 }
+```
+
+If you wanted to pass an initial value through a prop, then you can set state in the constructor instead.
+```javascript
+export default class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: props.count };
+  }
+
+  handleIncrement = () => this.setState((state) => { count: state.count + 1 });
+
+  render() {
+    return (
+      <div>
+        <div>count: {this.state.count}</div>
+        <button onClick={this.handleIncrement}>increment</button>
+      </div>
+    );
+  };
+}
+
+// Create component: <Counter count={13} />
+```
+
+### setState()
+**State Updates May Be Asynchronous.** React may batch multiple setState() calls into a single update for performance. Because `this.props` and `this.state` may be updated asynchronously, you should not rely on their values for calculating the next state.
+
+For example, this code may fail to update the counter:
+```javascript
+// Wrong
+this.setState({
+  counter: this.state.counter + this.props.increment,
+});
+```
+To fix it, use a second form of setState() that accepts a function rather than an object. That function will receive the previous state as the first argument, and the props at the time the update is applied as the second argument:
+```javascript
+// Correct
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
 ```

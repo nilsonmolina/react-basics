@@ -20,16 +20,16 @@ export default class ImageSlider extends React.Component {
 
   handleNext = () => {
     this.state.index < this.state.images.length - 1
-      ? this.setState({ index: this.state.index + 1 })
+      ? this.setState((state) => ({ index: state.index + 1 }))
       : this.setState({ index: 0 });   
   };
   handlePrevious = () => {
     this.state.index > 0
-      ? this.setState({ index: this.state.index - 1 })
-      : this.setState({ index: this.state.images.length - 1 });   
+      ? this.setState((state) => ({ index: state.index - 1 }))
+      : this.setState((state) => { index: state.images.length - 1 });   
   };
   toggleVisibility = () => {
-    this.setState({ visibility: !this.state.visibility });
+    this.setState((state) => ({ visibility: !state.visibility }));
   };
   
   render() {
